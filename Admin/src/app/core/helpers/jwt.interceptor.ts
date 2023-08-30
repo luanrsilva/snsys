@@ -3,13 +3,13 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 
 import { AuthenticationService } from '../services/auth.service';
-import { AuthfakeauthenticationService } from '../services/authfake.service';
 
 import { environment } from '../../../environments/environment';
+import { LoginService } from 'src/app/account/auth/services/login.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService, private authfackservice: AuthfakeauthenticationService) { }
+    constructor(private authenticationService: AuthenticationService, private loginService: LoginService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (environment.defaultauth === 'firebase') {
@@ -23,7 +23,7 @@ export class JwtInterceptor implements HttpInterceptor {
             }
         } else {
             // add authorization header with jwt token if available
-            const currentUser = this.authfackservice.currentUserValue;
+            const currentUser = this.loginService.currentUserValue;
             if (currentUser && currentUser.token) {
                 request = request.clone({
                     setHeaders: {

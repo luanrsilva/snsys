@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { getFirebaseBackend } from '../../authUtils';
@@ -9,8 +10,9 @@ import { User } from '../models/auth.models';
 export class AuthenticationService {
 
     user: User;
+    private registerUrl = "https://saitama.snsys.com.br/api/v1/settings/register";
 
-    constructor() {
+    constructor(private httpClient: HttpClient) {
     }
 
     /**
@@ -37,11 +39,10 @@ export class AuthenticationService {
      * @param email email
      * @param password password
      */
-    register(email: string, password: string) {
-        return getFirebaseBackend().registerUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
+    register(register: any) {
+      console.log(register);
+
+      return this.httpClient.post<any>(this.registerUrl, register);
     }
 
     /**

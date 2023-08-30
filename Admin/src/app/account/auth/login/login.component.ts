@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService, private loginService: LoginService) { }
+  constructor(private formBuilder: UntypedFormBuilder, private router: Router,
+    private loginService: LoginService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -65,28 +65,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/form/new']);
         },
         error: err => {
-          this.error = err ? err : '';
+          this.error = 'Invalid email or password';
         }
       })
-
-      // if (environment.defaultauth === 'firebase') {
-      //   this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
-      //     this.router.navigate(['/dashboard']);
-      //   })
-      //     .catch(error => {
-      //       this.error = error ? error : '';
-      //     });
-      // } else {
-      //   this.authFackservice.login(this.f.email.value, this.f.password.value)
-      //     .pipe(first())
-      //     .subscribe(
-      //       data => {
-      //         this.router.navigate(['/dashboard']);
-      //       },
-      //       error => {
-      //         this.error = error ? error : '';
-      //       });
-      // }
     }
   }
 }

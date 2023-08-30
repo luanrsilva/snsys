@@ -11,7 +11,7 @@
           <form class="needs-validation" (ngSubmit)="validSubmit()" [formGroup]="validationform">
             <div class="row">
               <div class="col-md-6">
-                <form action="#">
+                <form action="#" [formGroup]="validationform">
                   <div class="mb-4">
                     <label for="validationCustom01">Nome da Empresa</label>
                     <input type="text" class="form-control" id="validationCustom01" formControlName="firstName"
@@ -31,7 +31,7 @@
                 </form>
               </div> <!-- end col -->
               <div class="col-md-6">
-                <form action="#">
+                <form action="#" [formGroup]="validationform">
                   <div class="mb-4">
                     <label for="validationCustom03">Cidade</label>
                     <input type="text" class="form-control" id="validationCustom03" formControlName="city"

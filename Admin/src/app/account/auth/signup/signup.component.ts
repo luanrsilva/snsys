@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
+import { Company, SimpleUser, Subscription } from 'src/app/core/models/auth.models';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,7 @@ import { UserProfileService } from '../../../core/services/user.service';
 })
 export class SignupComponent implements OnInit {
 
-  signupForm: UntypedFormGroup;
+  signupForm: FormGroup;
   submitted:any = false;
   error:any = '';
   successmsg:any = false;
@@ -23,14 +24,23 @@ export class SignupComponent implements OnInit {
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
     private userService: UserProfileService) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      username: ['TESTE', Validators.required],
+      email: ['snsys@snsys.com', [Validators.required, Validators.email]],
+      password: ['TESTE123', Validators.required],
+      subscriptionName: ['TESTE', Validators.required],
+      plan: ['1', Validators.required],
+      period: ['1', Validators.required],
+      businessName: ['TESTE', Validators.required],
+      companyEmail: ['snsys@snsys.com', Validators.required],
+      socialName: ['TESTE', Validators.required],
+      cnpj: ['00.000.000/0000-00', Validators.required],
+      cell: ['(11) 1234-1234', Validators.required],
+      phone: ['(11) 1234-1234', Validators.required]
     });
   }
 
@@ -47,30 +57,58 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
     } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.register(this.f.email.value, this.f.password.value).then((res: any) => {
+
+      this.authenticationService.register(this.buildRegister()).subscribe({
+        next: (response) => {
           this.successmsg = true;
           if (this.successmsg) {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/account/login']);
           }
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
-      } else {
-        this.userService.register(this.signupForm.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.successmsg = true;
-              if (this.successmsg) {
-                this.router.navigate(['/account/login']);
-              }
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }
+        },
+        error: err => {
+          this.error = err.error.content[0]
+
+        }
+      })
+
     }
+  }
+
+  buildRegister(): any {
+    let user: SimpleUser = {
+      email: '',
+      name: '',
+      password: ''
+    };
+    let subscription: Subscription = {
+      name: '',
+      subscriptionPlanId: 0,
+      subscriptionPlanPeriodId: 0
+    };
+    let company: Company = {
+      businessName: '',
+      email: '',
+      socialName: '',
+      documentCnpj: '',
+      cellNumber: '',
+      phone: ''
+    };
+
+    user.name = this.f.username.value;
+    user.password = this.f.password.value;
+    user.email = this.f.email.value;
+
+    subscription.name = this.f.subscriptionName.value;
+    subscription.subscriptionPlanId = this.f.plan.value;
+    subscription.subscriptionPlanPeriodId = this.f.period.value;
+
+    company.businessName = this.f.businessName.value;
+    company.email = this.f.companyEmail.value;
+    company.socialName = this.f.socialName.value;
+    company.documentCnpj = this.f.cnpj.value;
+    company.cellNumber = this.f.cell.value;
+    company.phone = this.f.phone.value;
+
+    return {company, subscription, user};
   }
 }

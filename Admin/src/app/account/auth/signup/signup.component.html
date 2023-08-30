@@ -1,7 +1,7 @@
 <div class="account-pages my-5 pt-sm-5">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6 col-xl-5">
+      <div class="col-md-8 col-lg-6 col-xl-10">
         <div class="card overflow-hidden">
           <div class="bg-primary-subtle">
             <div class="row">
@@ -34,40 +34,166 @@
                 <alert type="success" *ngIf="successmsg" [dismissible]="false">Registeration successfull.
                 </alert>
 
-                <alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</alert>
+                <alert type="danger" *ngIf="error" [dismissible]="true">{{ error }}</alert>
 
-                <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
+                <div class="row">
+                  <div class="user col-md-6">
 
-                  <input type="text" formControlName="username" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" id="username"
-                    placeholder="Enter username" />
+                    <h4 class="card-title mb-4">User</h4>
 
-                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Userame is required</div>
+                    <div class="mb-3">
+                      <label for="username" class="form-label">Name</label>
+
+                      <input type="text" formControlName="username" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" id="username"
+                        placeholder="Nome do usuário" />
+
+                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Userame is required</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+
+                      <input type="email" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" placeholder="Email" />
+
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+
+                      <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" id="password" placeholder="Password" />
+
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="subscription col-md-6">
+
+                    <h4 class="card-title mb-4">Subscription</h4>
+
+                    <div class="mb-3">
+                      <label for="subscriptionName" class="form-label">Name</label>
+
+                      <input type="text" formControlName="subscriptionName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.subscriptionName.errors }" id="subscriptionName"
+                        placeholder="Name" />
+
+                      <div *ngIf="submitted && f.subscriptionName.errors" class="invalid-feedback">
+                        <div *ngIf="f.subscriptionName.errors.required">Name is required</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="plan" class="form-label">Plan</label>
+
+                      <input type="number" formControlName="plan" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.plan.errors }" id="plan" />
+
+                      <div *ngIf="submitted && f.plan.errors" class="invalid-feedback">
+                        <div *ngIf="f.plan.errors.required">Plan is required</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="period" class="form-label">Period</label>
+
+                      <input type="number" formControlName="period" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.period.errors }" id="period"/>
+
+                      <div *ngIf="submitted && f.period.errors" class="invalid-feedback">
+                        <div *ngIf="f.period.errors.required">Period is required</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
+                <div class="row">
+                  <h4 class="card-title mb-4">Company</h4>
 
-                  <input type="email" formControlName="email" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" placeholder="Email" />
+                  <div class="company col-md-6">
 
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    <div class="mb-3">
+                      <label for="businessName" class="form-label">Business Name</label>
+
+                      <input type="text" formControlName="businessName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.businessName.errors }" id="businessName"
+                        placeholder="Enter business name" />
+
+                      <div *ngIf="submitted && f.businessName.errors" class="invalid-feedback">
+                        <div *ngIf="f.businessName.errors.required">Business name is required</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="companyEmail" class="form-label">Email</label>
+
+                      <input type="email" formControlName="companyEmail" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="companyEmail" placeholder="Email" />
+
+                      <div *ngIf="submitted && f.companyEmail.errors" class="invalid-feedback">
+                        <div *ngIf="f.companyEmail.errors.required">Email is required</div>
+                        <div *ngIf="f.companyEmail.errors.email">Email must be a valid email address</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+
+                      <label for="socialName" class="form-label">Social Name</label>
+
+                      <input type="text" formControlName="socialName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.socialName.errors }" id="socialName"
+                        placeholder="Enter social name" />
+
+                      <div *ngIf="submitted && f.socialName.errors" class="invalid-feedback">
+                        <div *ngIf="f.socialName.errors.required">Social name is required</div>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
+                  <div class="company col-md-6" >
 
-                  <input type="password" formControlName="password" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" id="password" placeholder="Password" />
+                    <div class="mb-3">
+                      <label for="cnpj" class="form-label">CNPJ</label>
+                      <input type="text" class="form-control" mask="00.000.000/0000-00" data-reverse="true" placeholder="xx.xxx.xxx/xxxx-xx"
+                        [ngClass]="{ 'is-invalid': submitted && f.cnpj.errors }" formControlName="cnpj">
 
-                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
+                      <div *ngIf="submitted && f.cnpj.errors" class="invalid-feedback">
+                        <div *ngIf="f.cnpj.errors.required">CNPJ is required</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="cell" class="form-label">Cell</label>
+
+                      <input type="text" formControlName="cell" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.cell.errors }" id="cell" placeholder="(xx) xxxxx-xxxx" />
+
+                      <div *ngIf="submitted && f.cell.errors" class="invalid-feedback">
+                        <div *ngIf="f.cell.errors.required">Cell is required</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="phone" class="form-label">Phone</label>
+
+                      <input type="text" formControlName="phone" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" id="phone"
+                        placeholder="(xx) xxxxx-xxxx" />
+
+                      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.required">Phone is required</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
