@@ -70,21 +70,18 @@ export class SignupComponent implements OnInit {
 
         }
       })
-
     }
   }
 
   buildRegister(): any {
-    let user: SimpleUser = {
-      email: '',
-      name: '',
-      password: ''
-    };
-    let subscription: Subscription = {
-      name: '',
-      subscriptionPlanId: 0,
-      subscriptionPlanPeriodId: 0
-    };
+    const company = this.buildCompany();
+    const subscription = this.buildSubscription();
+    const user = this.buildSimpleUser();
+
+    return {company, subscription, user};
+  }
+
+  buildCompany(): Company {
     let company: Company = {
       businessName: '',
       email: '',
@@ -94,14 +91,6 @@ export class SignupComponent implements OnInit {
       phone: ''
     };
 
-    user.name = this.f.username.value;
-    user.password = this.f.password.value;
-    user.email = this.f.email.value;
-
-    subscription.name = this.f.subscriptionName.value;
-    subscription.subscriptionPlanId = this.f.plan.value;
-    subscription.subscriptionPlanPeriodId = this.f.period.value;
-
     company.businessName = this.f.businessName.value;
     company.email = this.f.companyEmail.value;
     company.socialName = this.f.socialName.value;
@@ -109,6 +98,34 @@ export class SignupComponent implements OnInit {
     company.cellNumber = this.f.cell.value;
     company.phone = this.f.phone.value;
 
-    return {company, subscription, user};
+    return company;
+  }
+
+  buildSimpleUser(): SimpleUser {
+    let user: SimpleUser = {
+      email: '',
+      name: '',
+      password: ''
+    };
+
+    user.name = this.f.username.value;
+    user.password = this.f.password.value;
+    user.email = this.f.email.value;
+
+    return user;
+  }
+
+  buildSubscription(): Subscription {
+    let subscription: Subscription = {
+      name: '',
+      subscriptionPlanId: 0,
+      subscriptionPlanPeriodId: 0
+    };
+
+    subscription.name = this.f.subscriptionName.value;
+    subscription.subscriptionPlanId = this.f.plan.value;
+    subscription.subscriptionPlanPeriodId = this.f.period.value;
+
+    return subscription;
   }
 }
