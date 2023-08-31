@@ -287,7 +287,8 @@
         "REPEATER": "Form Repeater",
         "WIZARD": "Form Wizard",
         "MASK": "Form Mask",
-        "LAYOUTS": "Form Layouts"
+        "LAYOUTS": "Form Layouts",
+        "NEWBUSINESS": "Form New Business"
       }
     },
     "TABLES": {
