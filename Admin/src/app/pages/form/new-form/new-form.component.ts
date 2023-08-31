@@ -18,7 +18,7 @@ export class NewFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Forms'}, { label: 'Nova Empresa', active: true }];
+    this.breadCrumbItems = [{ label: 'Forms'}, { label: 'New Business', active: true }];
 
     this.validationform = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+'), Validators.minLength(2)]],

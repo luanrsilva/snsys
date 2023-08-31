@@ -7,13 +7,13 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-4">Cadastro</h4>
+          <h4 class="card-title mb-4">Register</h4>
           <form class="needs-validation" (ngSubmit)="validSubmit()" [formGroup]="validationform">
             <div class="row">
               <div class="col-md-6">
                 <form action="#" [formGroup]="validationform">
                   <div class="mb-4">
-                    <label for="validationCustom01">Nome da Empresa</label>
+                    <label for="validationCustom01">Business Name</label>
                     <input type="text" class="form-control" id="validationCustom01" formControlName="firstName"
                       [ngClass]="{'is-valid': submit && form.firstName.errors}">
                     <div *ngIf="submit && form.firstName.errors" class="valid-feedback">
@@ -33,7 +33,7 @@
               <div class="col-md-6">
                 <form action="#" [formGroup]="validationform">
                   <div class="mb-4">
-                    <label for="validationCustom03">Cidade</label>
+                    <label for="validationCustom03">City</label>
                     <input type="text" class="form-control" id="validationCustom03" formControlName="city"
                       [ngClass]="{'is-invalid': submit && form.city.errors}">
                     <div *ngIf="submit && form.city.errors" class="invalid-feedback">
@@ -42,7 +42,7 @@
                   </div>
 
                   <div class="mb-4">
-                    <label for="validationCustom04">Estado</label>
+                    <label for="validationCustom04">State</label>
                     <input type="text" class="form-control" id="validationCustom04" formControlName="state"
                       [ngClass]="{'is-invalid': submit && form.state.errors}">
                     <div *ngIf="submit && form.state.errors" class="invalid-feedback">
@@ -51,7 +51,7 @@
                   </div>
 
                   <div class="mb-4">
-                    <label for="validationCustom05">CEP</label>
+                    <label for="validationCustom05">ZIP</label>
                     <input type="text" class="form-control" id="validationCustom05" formControlName="zip"
                       [ngClass]="{'is-invalid': submit && form.zip.errors}" mask="00000-000" placeholder="00000-000">
                     <div *ngIf="submit && form.zip.errors" class="invalid-feedback">
